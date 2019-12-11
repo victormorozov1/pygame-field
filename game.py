@@ -29,6 +29,9 @@ class Game:
             if keys[i]:
                 self.handle_pressed(i)
 
+    def game_iteration(self):
+        pass
+
     def run(self):
         pygame.init()
         win = pygame.display.set_mode((self.field.szx, self.field.szy))
@@ -36,6 +39,7 @@ class Game:
         while self.running:
             self.handle_events()
             self.handle_all_pressed()
+            self.game_iteration()
             self.field.show(win)
 
             sleep(self.sleep)

@@ -10,11 +10,12 @@ class Field:
         self.objects = []
         self.bg = bg
 
+    def remove_all_objects(self):
+        self.objects = []
+
     def add_object(self, picture, x, y):
-        print('adding object')
         self.last_id += 1
         self.objects.append(Object(self.last_id, picture, x, y))
-        print('now there are', len(self.objects), 'objects')
         return self.last_id
 
     def get_object_by_id(self, id):
