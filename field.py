@@ -7,15 +7,17 @@ class Field:
         self.szx = szx
         self.szy = szy
         self.last_id = 0
-        self.objects = []
         self.bg = bg
+        self.objects = pygame.sprite.Group()
+        pygame.init()
+        self.win = pygame.display.set_mode((self.szx, self.szy))
 
     def remove_all_objects(self):
-        self.objects = []
+        self.objects = pygame.sprite.Group()
 
     def add_object(self, picture, x, y):
         self.last_id += 1
-        self.objects.append(Object(self.last_id, picture, x, y))
+        obj = Object(self.last_id, picture, x, y, self.objects)
         return self.last_id
 
     def get_object_by_id(self, id):
@@ -24,24 +26,22 @@ class Field:
                 return i
 
     def remove_object(self, id):
-        for i in range(len(self.objects)):
-            if self.objects[i].id == id:
-                del self.objects[i]
+        for i in self.objects:
+            if i.id == id:
+                i.kill()
                 break
 
     def move_object_to(self, id, x, y):
         obj = self.get_object_by_id(id)
-        obj.x = x
-        obj.y = y
+        obj.rect.x = x
+        obj.rect.y = y
 
     def move_object_on(self, id, dx, dy):
         obj = self.get_object_by_id(id)
-        obj.x += dx
-        obj.y += dy
+        obj.rect.x += dx
+        obj.rect.y += dy
 
     def show(self, win):
-       # print('show', len(self.objects), 'objects')
         win.fill(self.bg)
-        for i in self.objects:
-            win.blit(i.picture, (i.x, i.y))
+        self.objects.draw(self.win)
         pygame.display.update()

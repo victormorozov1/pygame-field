@@ -33,13 +33,11 @@ class Game:
         pass
 
     def run(self):
-        pygame.init()
-        win = pygame.display.set_mode((self.field.szx, self.field.szy))
         self.running = True
         while self.running:
             self.handle_events()
             self.handle_all_pressed()
             self.game_iteration()
-            self.field.show(win)
+            self.field.show(self.field.win)
 
             sleep(self.sleep)

@@ -4,21 +4,28 @@ import threading
 
 
 class MyGame(Game):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.pict_id = 0
+
     def handle_event(self, ev):
         if ev.type == pygame.KEYDOWN:
             if not len(self.field.objects):
                 pict = pygame.image.load('r.png')
-                my_game.field.add_object(pict, 1, 1)
+                self.pict_id = my_game.field.add_object(pict, 1, 1)
+
+    def move_pict(self, move_x, move_y):
+        my_game.field.move_object_on(self.pict_id, move_x, move_y)
 
     def handle_pressed(self, key):
         if key == pygame.K_RIGHT:
-            my_game.field.move_object_on(my_game.field.objects[0].id, 1, 0)
+            self.move_pict(1, 0)
         elif key == pygame.K_LEFT:
-            my_game.field.move_object_on(my_game.field.objects[0].id, -1, 0)
+            self.move_pict(-1, 0)
         elif key == pygame.K_UP:
-            my_game.field.move_object_on(my_game.field.objects[0].id, 0, -1)
+            self.move_pict(0, -1)
         elif key == pygame.K_DOWN:
-            my_game.field.move_object_on(my_game.field.objects[0].id, 0, 1)
+            self.move_pict(0, 1)
 
 
 if __name__ == '__main__':
