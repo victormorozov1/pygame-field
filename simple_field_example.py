@@ -2,6 +2,8 @@ from game import Game
 import pygame
 import threading
 
+SPEED = 1
+
 
 class MyGame(Game):
     def __init__(self, *args, **kwargs):
@@ -11,7 +13,7 @@ class MyGame(Game):
     def handle_event(self, ev):
         if ev.type == pygame.KEYDOWN:
             if not len(self.field.objects):
-                pict = pygame.image.load('r.png')
+                pict = pygame.image.load('pictures/r.png')
                 self.pict_id = my_game.field.add_object(pict, 1, 1)
 
     def move_pict(self, move_x, move_y):
@@ -19,13 +21,13 @@ class MyGame(Game):
 
     def handle_pressed(self, key):
         if key == pygame.K_RIGHT:
-            self.move_pict(1, 0)
+            self.move_pict(SPEED, 0)
         elif key == pygame.K_LEFT:
-            self.move_pict(-1, 0)
+            self.move_pict(-SPEED, 0)
         elif key == pygame.K_UP:
-            self.move_pict(0, -1)
+            self.move_pict(0, -SPEED)
         elif key == pygame.K_DOWN:
-            self.move_pict(0, 1)
+            self.move_pict(0, SPEED)
 
 
 if __name__ == '__main__':

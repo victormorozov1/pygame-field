@@ -1,11 +1,23 @@
 from field import Field
 import pygame
 from time import sleep
+from cell_field import CellField
 
 
 class Game:
-    def __init__(self, szx, szy, bg=(255, 255, 255), sleep=0.01):
-        self.field = Field(szx, szy, bg=bg)
+    def __init__(self, szx, szy, bg=(255, 255, 255), sleep=0.01, field='simple field', field_arr=None,
+                 field_dict=None, cell_field_sz=64):
+        if field == 'simple field':
+            self.field = Field(szx, szy, bg=bg)
+        elif field == 'cell field':
+            self.field = CellField(szx, szy, field_arr, field_dict, cell_sz=cell_field_sz, bg=bg)
+        else:
+            self.field = field
+            print('Warning: strange field', end=' ')
+            try:
+                print(field)
+            except BaseException:
+                print()
         self.sleep = sleep
 
     def handle_event_exit(self, ev):
@@ -30,7 +42,7 @@ class Game:
                 self.handle_pressed(i)
 
     def game_iteration(self):
-        pass
+        self.field.show(self.field.win)
 
     def run(self):
         self.running = True
@@ -38,6 +50,5 @@ class Game:
             self.handle_events()
             self.handle_all_pressed()
             self.game_iteration()
-            self.field.show(self.field.win)
 
             sleep(self.sleep)
