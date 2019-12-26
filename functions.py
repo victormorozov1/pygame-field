@@ -15,7 +15,7 @@ def sign(k):
 
 def load_level(ind):
     ret = []
-    f = open('levels/' + str(ind) + '.txt', 'r')
+    f = open('data/levels/' + str(ind) + '.txt', 'r')
     for line in f:
         ret.append(line.strip('\n'))
     f.close()

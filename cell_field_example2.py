@@ -68,13 +68,13 @@ if __name__ == '__main__':
     field_arr = load_level(int(input('choose level from 1 to 4')))
 
     field_dict = dict()
-    field_dict['.'] = pygame.image.load('pictures/grass.png')
-    field_dict['#'] = pygame.image.load('pictures/box.png')
+    field_dict['.'] = pygame.image.load('data/pictures/grass.png')
+    field_dict['#'] = pygame.image.load('data/pictures/box.png')
 
     my_game = MyGame(550, 550, sleep=0.001, cell_field_sz=50, bg=(122, 233, 111), field='cell field',
                      field_arr=field_arr,
                      field_dict=field_dict)
 
-    mar_id = my_game.field.add_object(pygame.transform.scale(pygame.image.load('pictures/mar.png'), (50, 50)), *my_game.free_cell())
+    mar_id = my_game.field.add_object(pygame.transform.scale(pygame.image.load('data/pictures/mar.png'), (50, 50)), *my_game.free_cell())
 
     my_game.run()

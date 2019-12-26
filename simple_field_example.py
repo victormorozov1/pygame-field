@@ -13,7 +13,7 @@ class MyGame(Game):
     def handle_event(self, ev):
         if ev.type == pygame.KEYDOWN:
             if not len(self.field.objects):
-                pict = pygame.image.load('pictures/r.png')
+                pict = pygame.image.load('data/pictures/r.png')
                 self.pict_id = my_game.field.add_object(pict, 1, 1)
 
     def move_pict(self, move_x, move_y):
